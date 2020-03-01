@@ -1,0 +1,165 @@
+main_analysis:
+    MTR:
+        #location: 'test_191206/test_VBF_2018_MTR_testing_ICxs/'
+        #location: 'test_191206/test_VBF_2017_MTR_testing/'
+        location: '/eos/user/v/vmilosev/SWAN_projects/Hinv-Plotting/work_200205/'
+        eras:
+            2017:
+                #lumi: 41859.516607442
+                lumi: 41528.995402
+                lumi_for_label: '41.5'
+            
+            2018:
+                #lumi: 58877.436922739
+                lumi: 59740.56520
+                lumi_for_label: '59.7'
+                
+            2017_VTR:
+                #lumi: 41859.516607442
+                lumi: 36700
+                lumi_for_label: '36.7'
+
+        regions:
+            - Zee
+            - Zmumu
+            - Wmunu
+            - Wenu
+            - SR 
+
+        bkg_processes:
+            0:
+                color: '#7bc345'
+                folder_name: VV
+                latex_name: VV
+
+            1:
+                color: '#CF3721'
+                folder_name: TOP
+                latex_name: Top
+
+            2:
+                color: '#9767a3'
+                folder_name: DY
+                latex_name: 'QCD Z #rightarrow ll'
+
+            3:
+                color: '#c46c9c'
+                folder_name: EWKZll
+                latex_name: 'EWK Z #rightarrow ll'
+
+            4:
+                color: '#457bc3'
+                folder_name: EWKZNUNU
+                latex_name: 'EWK Z #rightarrow #nu#nu'
+
+            5:
+                color: '#14dbf9'
+                folder_name: ZJETS
+                latex_name: 'QCD Z #rightarrow #nu#nu'            
+             
+            6:
+                color: '#f28d84'
+                folder_name: EWKW
+                latex_name: 'EWK W #rightarrow l#nu'
+
+            7:
+                color: '#febc67'
+                folder_name: WJETS
+                latex_name: 'QCD W #rightarrow l#nu'
+  
+ #           8:
+ #               color: '#ffffff'
+ #               folder_name: QCD
+ #               latex_name: QCD
+
+            9:
+                color: 1
+                folder_name: VBFHtoInv
+                latex_name: 'VBF H#rightarrow Inv' 
+          
+
+        datasets:
+            met: MET
+            single_ele: SingleElectron
+            
+            
+qcd_estimate:
+        location: 'TBA'
+        eras:
+            2017:
+                lumi: 41859.516607442
+                lumi_for_label: '41.9'
+            
+            2018:
+                lumi: 58877.436922739
+                lumi_for_label: '58.9'
+
+        regions:
+            - QCD_CR
+            - QCD_A
+            - QCD_B
+         #   - SR
+
+        bkg_processes:
+            0:
+                color: '#7bc345'
+                folder_name: VV
+                latex_name: VV
+
+            1:
+                color: '#CF3721'
+                folder_name: TOP
+                latex_name: Top
+
+            2:
+                color: '#9767a3'
+                folder_name: DY
+                latex_name: 'QCD Z #rightarrow ll'
+
+            3:
+                color: '#c46c9c'
+                folder_name: EWKZll
+                latex_name: 'EWK W #rightarrow l#nu'
+
+            4:
+                color: '457bc3'
+                folder_name: EWKZNUNU
+                latex_name: 'EWK Z #rightarrow #nu#nu'
+
+            5:
+                color: '#14dbf9'
+                folder_name: ZJETS
+                latex_name: 'QCD Z #rightarrow #nu#nu'            
+             
+            6:
+                color: '#f28d84'
+                folder_name: EWKW
+                latex_name: 'EWK W #rightarrow l#nu'
+
+            7:
+                color: '#febc67'
+                folder_name: WJETS
+                latex_name: 'QCD W #rightarrow l#nu'
+          
+
+        datasets:
+            met: MET
+            jet_ht: JetHT
+
+
+trigger_study:
+    METMHT:
+        location: 'TBA'
+        eta:
+           - 2017
+           - 2018
+        dataset: SingleMuon
+        bkg: WJETS
+     
+    VBF:
+        location: 'TBA'    
+        era:
+            - 2017
+            - 2018
+        dataset: SingleMuon
+        bkg: WJETS
