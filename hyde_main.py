@@ -63,19 +63,20 @@ categories = ['MTR']
 Lumi_label = Eras[2018]['lumi_for_label']
 Lumi = Eras[2018]['lumi']
 
+ROOT.gROOT.SetBatch()
 
 for category in categories:
-    print "Processing "+category
+    print bcolors.OKBLUE+"Processing "+bcolors.ENDC+bcolors.OKGREEN+category+bcolors.ENDC
     location = Location+ "test_VBF_2018_"+category+"_testing/"
     Output_dir = location+"/Plots"
     os.system("mkdir "+Output_dir)
 
     for region in Regions:
-        print "--Region: "+region
+        print bcolors.OKBLUE+"--Region: "+bcolors.ENDC+bcolors.OKGREEN+region+bcolors.ENDC
         output_dir =  Output_dir+ "/"+region
         os.system("mkdir "+output_dir)
         for variable in variables:
-            print "----Processing: ", variable[0]
+            print bcolors.OKGREEN+"----Processing: ", variable[0]+bcolors.ENDC
             if ("We" in region) or ("Zee" in region):
                 dataset_name = Datasets['single_ele']
             else:
