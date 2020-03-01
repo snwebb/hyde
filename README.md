@@ -1,4 +1,5 @@
-# Higgs to invisible Yields extractor and Dataframes editor
+# HYDE plotting tool
+HYDE = Higgs to invisible Yields extractor and Dataframes editor
 
 To run the plotting software:
 ```
