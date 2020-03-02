@@ -1,0 +1,163 @@
+diMuon_mass:
+    file_name: diMuon_mass--dimuonmass
+    histogram_name: diMuon_mass--dimuonmass_
+    histogram_label: 'M_{#mu#mu} [GeV];Events/2.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 2
+    set_range: [60, 120]
+    
+diElectron_mass:
+    file_name: diElectron_mass--dielmass
+    histogram_name: diElectron_mass--dielmass_
+    histogram_label: 'M_{ee} [GeV];Events/2.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 2
+    set_range: [60, 120]
+        
+    
+lMjj:
+    file_name: lMjj--lMjj
+    histogram_name: lMjj--lMjj_
+    histogram_label: 'lM_{jj} [GeV];Events/100.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 2 
+    set_range: [500.0, 5000.0] 
+    
+Met:
+    file_name: Met--met
+    histogram_name: Met--met_
+    histogram_label: 'E_{T,miss} [GeV];Events/10.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 800.0]
+    
+Leading_muon_eta:
+    file_name: Leading_muon_eta--muon_eta1
+    histogram_name: Leading_muon_eta--muon_eta1_
+    histogram_label: '#eta_{#mu1};Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-2.5, 2.5]
+    
+Leading_muon_phi:
+    file_name: Leading_muon_phi--muon_phi1
+    histogram_name: Leading_muon_phi--muon_phi1_
+    histogram_label: '#phi_{\mu 1} [GeV];Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-3.5, 3.5]
+
+Leading_muon_pt:
+    file_name: Leading_muon_pt--muon_pt1
+    histogram_name: Leading_muon_pt--muon_pt1_
+    histogram_label: 'P_{T}_{#mu1} [GeV];Events/10.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 500.0]
+ 
+Subleading_muon_eta:
+    file_name: Subleading_muon_eta--muon_eta2
+    histogram_name: Subleading_muon_eta--muon_eta2_
+    histogram_label: '#eta_{#mu2};Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-2.5, 2.5]
+
+Subleading_muon_phi:
+    file_name: Subleading_muon_phi--muon_phi2
+    histogram_name: Subleading_muon_phi--muon_phi2_
+    histogram_label: '#phi_{\mu 2} [GeV];Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-3.5, 3.5]
+  
+Subleading_muon_pt:
+    file_name: Subleading_muon_pt--muon_pt2
+    histogram_name: Subleading_muon_pt--muon_pt2_
+    histogram_label: 'P_{T}_{#mu2} [GeV];Events/10.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 300.0]
+
+MetNoLep_CleanJet_mindPhi:
+    file_name: MetNoLep_CleanJet_mindPhi--metnolep_cleanjet_mindphi
+    histogram_name: MetNoLep_CleanJet_mindPhi--metnolep_cleanjet_mindphi_
+    histogram_label: 'min #Delta#phi(j, E_{T,miss, no Lep});Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 2
+    set_range: [0.0, 3.5]
+   
+MetNoMu:
+    file_name: MetNoMu--met_nolep
+    histogram_name: MetNoMu--met_nolep_
+    histogram_label: 'E_{T,miss, no #mu} [GeV];Events/10.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [250.0, 800]
+    
+    
+MTmu_FAST:
+    file_name: MTmu_FAST--mt_mu_fast
+    histogram_name: tbl_MTmu_FAST--mt_mu_fast_
+    histogram_label: 'MT_{T, #mu} [GeV];Events/10.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 300]  
+   
+MTel_FAST:
+    file_name: MTe_FAST--mt_el_fast
+    histogram_name: tbl_MTe_FAST--mt_el_fast_
+    histogram_label: 'MT_{T, e} [GeV];Events/10.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 300]  
+   
+Leading_electron_eta:  
+    file_name: Leading_electron_eta--el_eta1
+    histogram_name: Leading_electron_eta--el_eta1_
+    histogram_label: '#eta_{e1};Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-2.5, 2.5]       
+        
+Leading_electron_phi:
+    file_name: Leading_electron_phi--el_phi1
+    histogram_name: Leading_electron_phi--el_phi1_
+    histogram_label: '#phi_{e 1} [GeV];Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-3.5, 3.5]
+    
+Leading_electron_pt--el_pt1:
+    file_name: Leading_electron_pt--el_pt1
+    histogram_name: Leading_electron_pt--el_pt1_
+    histogram_label: 'P_{T, e1} [GeV];Events/10.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 500.0]
+   
+Subleading_electron_eta:  
+    file_name: Subleading_electron_eta--el_eta2
+    histogram_name: Subleading_electron_eta--el_eta2_
+    histogram_label: '#eta_{e2};Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-2.5, 2.5]
+    
+Subleading_electron_phi:
+    file_name: Subleading_electron_phi--el_phi2
+    histogram_name: Subleading_electron_phi--el_phi2_
+    histogram_label: '#phi_{e 2} [GeV];Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-3.5, 3.5]
+    
+    
+Subleading_electron_pt:
+    file_name: Subleading_electron_pt--el_pt2
+    histogram_name: Subleading_electron_pt--el_pt2_
+    histogram_label: 'P_{T, e2} [GeV];Events/10.0 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 300.0]
+   

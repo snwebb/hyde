@@ -52,21 +52,23 @@ Bkg_processes = Input[Config.bkg_processes]
 Datasets = Input[Config.datasets]
 
 
-variables = CollectFromConfigVairables('test_variables.yaml')
+variables_MTR = CollectFromConfigVairables('test_variables_MTR.yaml')
+variables_VTR = CollectFromConfigVairables('test_variables_VTR.yaml')
 #print variables
 
 '''
 Plotting stage for the MTR category
 '''
 
-categories = ['MTR']
-Lumi_label = Eras[2018]['lumi_for_label']
-Lumi = Eras[2018]['lumi']
+categories = ['MTR', 'MTR', 'VTR', 'VTR']
+eras = ['2017', '2018', '2017', '2018']
+Lumi_labels = [Eras[2017]['lumi_for_label'], Eras[2018]['lumi_for_label'], Eras['2017_VTR']['lumi_for_label'], Eras[2018]['lumi_for_label']]
+Lumis = [Eras[2017]['lumi'], Eras[2018]['lumi'], Eras['2017_VTR']['lumi'], Eras[2018]['lumi']]
 
 ROOT.gROOT.SetBatch()
 
-for category in categories:
-    print bcolors.OKBLUE+"Processing "+bcolors.ENDC+bcolors.OKGREEN+category+bcolors.ENDC
+for category, Lumi_label, Lumi, era in zip(categories, Lumi_labels, Lumis, eras):
+    print bcolors.OKBLUE+"Processing "+bcolors.ENDC+bcolors.OKGREEN+category+" "+era+bcolors.ENDC
     location = Location+ "test_VBF_2018_"+category+"_testing/"
     Output_dir = location+"/Plots"
     os.system("mkdir "+Output_dir)
@@ -75,6 +77,11 @@ for category in categories:
         print bcolors.OKBLUE+"--Region: "+bcolors.ENDC+bcolors.OKGREEN+region+bcolors.ENDC
         output_dir =  Output_dir+ "/"+region
         os.system("mkdir "+output_dir)
+        if category == 'VTR':
+            variables = variables_VTR
+        else:
+            variables = variables_MTR
+
         for variable in variables:
             print bcolors.OKGREEN+"----Processing: ", variable[0]+bcolors.ENDC
             if ("We" in region) or ("Zee" in region):
