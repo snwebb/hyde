@@ -9,49 +9,7 @@ from array import array
 import ROOT
 from ROOT import TCanvas, TH1F, TF1, TLegend, gPad, THStack, TColor
 import math
-
-def CreateHistogramNP_backup(df,column_name, name, label, variable='n', color=0, lumi =1, Rebin = 1):
-    
-    if type(color) == str:
-        c1 = TColor()
-        color = c1.GetColor(color)
- 
-            
-    a = interval_from_string(df[column_name])
-    nBins = len(a) - 2 #excluding under/overflow bins from plots
-    
-    bins = []  
-    bins = a.left[1:] #excluding the underflow bin, but keeping the overflow as we want the last bin edge - which happens to be the left edge of the overflow bin
-    d_bins = array('d', bins)
-    
-
-    if Rebin > 1: 
-        if not(nBins % Rebin):
-            print "Ok to rebin."
-        else:
-            print "Not ok to rebin -- using orginal binning scheme with ", nBins, " bins."
-   # print nBins
-   # print d_bins
-    h_test = ROOT.TH1D("h_"+name,";"+label+";Events;;", nBins, d_bins)
-
-    for i in range(1, nBins+1):
-        h_test.SetBinContent(i, df[variable][i])
-        if df[variable][i] > 0: 
-            h_test.SetBinError(i, df[variable][i]/math.sqrt(df['n'][i]) )
-        else:
-            h_test.SetBinError(i, 0)
-        if variable != 'n':
-            h_test.SetBinContent(i, h_test.GetBinContent(i)*lumi)
-            h_test.SetBinError(i,h_test.GetBinError(i)*lumi)        
-                
-    if color!=0 :
-        h_test.SetFillColor(color)
-        h_test.SetLineColor(color)
-        
-    h_test.GetXaxis().SetRangeUser(bins[0], bins[-1])
-    
-    return h_test
-
+import numpy as np
 
 
 
@@ -67,6 +25,11 @@ def CreateHistogramNP(df,column_name, name, label, variable='n', color=0, lumi =
     
     bins = []  
     bins = a.left[1:] #excluding the underflow bin, but keeping the overflow as we want the last bin edge - which happens to be the left edge of the overflow bin
+    #print(bins)
+   # if ('eta' in column_name.lower()) | ('phi' in column_name.lower()):
+   #     #print(bins)
+   #     bins = np.round(bins, decimals=1)
+   #     #print(bins)
     d_bins = array('d', bins)
     
     
@@ -74,10 +37,10 @@ def CreateHistogramNP(df,column_name, name, label, variable='n', color=0, lumi =
     
     if Rebin > 1: 
         if not(nBins % Rebin):
-    #        print "Ok to rebin."
+    #        #print "Ok to rebin."
             Ok_to_rebin = True
      #   else:
-     #       print "Not ok to rebin -- using orginal binning scheme with ", nBins, " bins."
+     #       #print "Not ok to rebin -- using orginal binning scheme with ", nBins, " bins."
 
     h_test = ROOT.TH1D("h_"+name,";"+label+";Events;;", nBins, d_bins)
     
@@ -86,16 +49,16 @@ def CreateHistogramNP(df,column_name, name, label, variable='n', color=0, lumi =
         counter = 0
         value = 0
         N = 0
-        
+        #print("Rebin :"+str(Rebin)) 
         h_test.Rebin(Rebin)
         
         for i in range(1, nBins+2): # has to go to N+1 in order to fill the last bin
             
             #print i 
             if (counter >= Rebin): 
-              #  print "Bin rebinned", i/Rebin
-              #  print "With value = ", value
-             #   print 1.0*i/Rebin
+                #print "Bin rebinned", i/Rebin
+                #print "With value = ", value
+                #print 1.0*i/Rebin
                 h_test.SetBinContent(i/Rebin, value)
                 if N>0:
                     h_test.SetBinError(i/Rebin, value/math.sqrt(N))
@@ -113,9 +76,9 @@ def CreateHistogramNP(df,column_name, name, label, variable='n', color=0, lumi =
                      
                 
             else:
-              #  print "Counter will increase", counter 
-              #  print "Value",  value
-              #  print "N",  N
+                #print "Counter will increase", counter 
+                #print "Value",  value
+                #print "N",  N
   
                 value = value + df[variable][i]
                 N = N + df['n'][i]

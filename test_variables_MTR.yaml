@@ -59,9 +59,9 @@ Leading_jet_eta:
 Leading_jet_phi:
     file_name: Leading_jet_phi--jet_phi1
     histogram_name: Leading_jet_phi--jet_phi1_
-    histogram_label: '#phi_{j 1} [GeV];Events/0.1;;'
+    histogram_label: '#phi_{j 1};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 5
     set_range: [-3.5, 3.5]
 
 Leading_jet_pt:
@@ -82,11 +82,11 @@ Subleading_jet_eta:
     
     
 Subleading_jet_phi:
-    file_name: Leading_jet_phi--jet_phi1
-    histogram_name: Leading_jet_phi--jet_phi1_
-    histogram_label: '#phi_{j 2} [GeV];Events/0.1;;'
+    file_name: Subleading_jet_phi--jet_phi2
+    histogram_name: Subleading_jet_phi--jet_phi2_
+    histogram_label: '#phi_{j 2};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 5
     set_range: [-3.5, 3.5]
 
     
@@ -103,15 +103,15 @@ Leading_muon_eta:
     histogram_name: Leading_muon_eta--muon_eta1_
     histogram_label: '#eta_{#mu1};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 2
     set_range: [-2.5, 2.5]
     
 Leading_muon_phi:
     file_name: Leading_muon_phi--muon_phi1
     histogram_name: Leading_muon_phi--muon_phi1_
-    histogram_label: '#phi_{\mu 1} [GeV];Events/0.1;;'
+    histogram_label: '#phi_{\mu 1};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 5
     set_range: [-3.5, 3.5]
 
 Leading_muon_pt:
@@ -127,15 +127,15 @@ Subleading_muon_eta:
     histogram_name: Subleading_muon_eta--muon_eta2_
     histogram_label: '#eta_{#mu2};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 2
     set_range: [-2.5, 2.5]
 
 Subleading_muon_phi:
     file_name: Subleading_muon_phi--muon_phi2
     histogram_name: Subleading_muon_phi--muon_phi2_
-    histogram_label: '#phi_{\mu 2} [GeV];Events/0.1;;'
+    histogram_label: '#phi_{\mu 2};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 5
     set_range: [-3.5, 3.5]
   
 Subleading_muon_pt:
@@ -184,15 +184,15 @@ Leading_electron_eta:
     histogram_name: Leading_electron_eta--el_eta1_
     histogram_label: '#eta_{e1};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
-    set_range: [-2.5, 2.5]       
+    rebin: 2
+    set_range: [-3.5, 3.5]       
         
 Leading_electron_phi:
     file_name: Leading_electron_phi--el_phi1
     histogram_name: Leading_electron_phi--el_phi1_
-    histogram_label: '#phi_{e 1} [GeV];Events/0.1;;'
+    histogram_label: '#phi_{e 1} ;Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 5
     set_range: [-3.5, 3.5]
     
 Leading_electron_pt--el_pt1:
@@ -208,15 +208,15 @@ Subleading_electron_eta:
     histogram_name: Subleading_electron_eta--el_eta2_
     histogram_label: '#eta_{e2};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 2
     set_range: [-2.5, 2.5]
     
 Subleading_electron_phi:
     file_name: Subleading_electron_phi--el_phi2
     histogram_name: Subleading_electron_phi--el_phi2_
-    histogram_label: '#phi_{e 2} [GeV];Events/0.1;;'
+    histogram_label: '#phi_{e 2};Events/0.1;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 5
     set_range: [-3.5, 3.5]
     
     

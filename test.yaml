@@ -2,7 +2,7 @@ main_analysis:
     MTR:
         #location: 'test_191206/test_VBF_2018_MTR_testing_ICxs/'
         #location: 'test_191206/test_VBF_2017_MTR_testing/'
-        location: '/eos/user/v/vmilosev/SWAN_projects/Hinv-Plotting/work_200205/'
+        location: '/eos/user/v/vmilosev/SWAN_projects/Hinv-Plotting/work_200303/'
         eras:
             2017:
                 #lumi: 41859.516607442

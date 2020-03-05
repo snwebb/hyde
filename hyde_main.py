@@ -65,14 +65,24 @@ eras = ['2017', '2018', '2017', '2018']
 Lumi_labels = [Eras[2017]['lumi_for_label'], Eras[2018]['lumi_for_label'], Eras['2017_VTR']['lumi_for_label'], Eras[2018]['lumi_for_label']]
 Lumis = [Eras[2017]['lumi'], Eras[2018]['lumi'], Eras['2017_VTR']['lumi'], Eras[2018]['lumi']]
 
+
+'''
+For testing
+'''
+categories = ['MTR']
+eras = ['2017']
+Lumi_labels = [Eras[2017]['lumi_for_label']]
+Lumis = [Eras[2017]['lumi']]
+Regions = ['Zee']
+
 ROOT.gROOT.SetBatch()
 
 for category, Lumi_label, Lumi, era in zip(categories, Lumi_labels, Lumis, eras):
     print bcolors.OKBLUE+"Processing "+bcolors.ENDC+bcolors.OKGREEN+category+" "+era+bcolors.ENDC
-    location = Location+ "test_VBF_2018_"+category+"_testing/"
+    location = Location+ "test_VBF_"+era+"_"+category+"_testing/"
     Output_dir = location+"/Plots"
     os.system("mkdir "+Output_dir)
-
+    
     for region in Regions:
         print bcolors.OKBLUE+"--Region: "+bcolors.ENDC+bcolors.OKGREEN+region+bcolors.ENDC
         output_dir =  Output_dir+ "/"+region
@@ -87,6 +97,6 @@ for category, Lumi_label, Lumi, era in zip(categories, Lumi_labels, Lumis, eras)
             if ("We" in region) or ("Zee" in region):
                 dataset_name = Datasets['single_ele']
             else:
-                dataset_name = Datasets['met']        
+                dataset_name = Datasets['met']       
             test = PlotVariables(output_dir, dataset_name, variable, weight_names, region, location, Bkg_processes, Lumi, Lumi_label)
- 
+ #           i = i+1

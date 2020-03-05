@@ -80,7 +80,7 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         else:
             legend_args = (0.18, 0.55, 0.55, 0.91, '', 'NDC') 
 
-        if 'mindPhi' in variable[0]:
+        if 'mindPhi' in variable[0] or ('electron' in variable[Properties.Name].lower() and 'phi' in variable[Properties.Name].lower()):
             legend_args = (0.18, 0.55, 0.55, 0.91, '', 'NDC') 
 
 
@@ -88,10 +88,13 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         legend.append(TLegend(*legend_args))
         legend[plot_count].SetFillStyle(0)
 
+        legend[plot_count].AddEntry(data_hist[plot_count], 'Data', 'p')
+
         if not(len(signal_name) == 0):
             SIGNAL = pd.read_csv(mc_prefix+'/'+signal_name[0]+'/tbl_'+variable[Properties.Name]+weight_names+'.csv',comment='#')
             signal_hist.append(CreateHistogramNP(SIGNAL, tmp1_name ,variable[Properties.HistName]+"_signal",variable[Properties.AxisLabels], variable[Properties.Weight], 1, Lumi, variable[Properties.Rebin]))
-            legend[plot_count].AddEntry(signal_hist[plot_count], 'VBF H#rightarrow Inv', 'l')
+            if 'SR' in region:
+                legend[plot_count].AddEntry(signal_hist[plot_count], 'VBF H#rightarrow Inv', 'l')
 
 
         for bkg_name in bkg_names:
@@ -184,15 +187,24 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         bkg_for_ratio[plot_count].Draw("E2 same")
 
         if LOG:
-            data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1000*bkg_for_ratio[plot_count].GetMaximum())
+            data_hist[plot_count].GetYaxis().SetRangeUser(0.2,1000*bkg_for_ratio[plot_count].GetMaximum())
         else:
-            data_hist[plot_count].GetYaxis().SetRangeUser(0,1.3*bkg_for_ratio[plot_count].GetMaximum())
+            data_hist[plot_count].GetYaxis().SetRangeUser(0,1.7*bkg_for_ratio[plot_count].GetMaximum())
+            if data_hist[plot_count].Integral() > 0:
+                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*bkg_for_ratio[plot_count].GetMaximum())
+                if 'mjj' in variable[Properties.Name] or 'nomu' in variable[Properties.Name].lower():
+                    data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
+
+        data_hist[plot_count].GetXaxis().SetLabelSize(0.1)
+        data_hist[plot_count].GetYaxis().SetTitleOffset(1.1)
+        data_hist[plot_count].GetXaxis().SetTitleSize(.12)
 
         data_hist[plot_count].Draw("e1 same")
 
         if not(len(signal_name)==0):
             signal_hist[plot_count].SetLineWidth(4)
             signal_hist[plot_count].SetFillStyle(0)
+            signal_hist[plot_count].Scale(5)
             signal_hist[plot_count].Draw("hist same")
 
         #gPad.Draw()
@@ -212,11 +224,16 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         #r = ROOT.TGraph(20); 
         #r.SetTitle("");
         data_for_ratio[plot_count].Divide(bkg_for_ratio[plot_count])
-        data_for_ratio[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high]) 
+        data_for_ratio[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high])
+
+        data_for_ratio[plot_count].GetYaxis().SetRangeUser(0.71,1.29)
+        data_for_ratio[plot_count].GetYaxis().SetTitle("Data / Pred.")
         data_for_ratio[plot_count].GetXaxis().SetTitleSize(.12)
-        data_for_ratio[plot_count].GetYaxis().SetTitle("Data/MC")
+        data_for_ratio[plot_count].GetYaxis().SetTitleSize(.12)
+        data_for_ratio[plot_count].GetYaxis().SetTitleOffset(0.55)
+        data_for_ratio[plot_count].GetYaxis().SetLabelSize(0.1)
+        data_for_ratio[plot_count].GetXaxis().SetLabelSize(0.1)
         data_for_ratio[plot_count].Draw("e1")
-        data_for_ratio[plot_count].GetYaxis().SetRangeUser(0.5, 1.5)
         bkg_band = bkg_for_ratio[plot_count].Clone()
         bkg_band_d = bkg_for_ratio[plot_count].Clone()
         bkg_band.Divide(bkg_band_d)
@@ -226,6 +243,7 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         bkg_band.Draw("E2 same")
 #        c[plot_count].Draw()
 
+        gPad.RedrawAxis();
 
         if not(LOG):
             c[plot_count].SaveAs(output_dir+"/"+tmp1_name+".pdf")
