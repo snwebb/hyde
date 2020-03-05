@@ -1,6 +1,6 @@
 import os
 
-location = '/eos/user/v/vmilosev/SWAN_projects/Hinv-Plotting/work_200303/'
+location = '..//'
 
 MTR_SR_plots = [
 'MetNoMu',

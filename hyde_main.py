@@ -37,9 +37,9 @@ class bcolors:
 def IntroGreeting():
     f = open('hyde_logo.txt','r')
     for line in f:
-        print bcolors.BOLD+bcolors.OKGREEN+line[:-1]+bcolors.ENDC
-    print bcolors.OKBLUE+"Higgs to invisible Yields and Datatframe Extractor"+bcolors.ENDC
-    print bcolors.OKBLUE+"-- 2019, Vukasin Milosevic "+bcolors.ENDC
+        print(bcolors.BOLD+bcolors.OKGREEN+line[:-1]+bcolors.ENDC)
+    print(bcolors.OKBLUE+"Higgs to invisible Yields and Datatframe Extractor"+bcolors.ENDC)
+    print(bcolors.OKBLUE+"-- 2019, Vukasin Milosevic "+bcolors.ENDC)
 
 
 IntroGreeting()
@@ -69,22 +69,22 @@ Lumis = [Eras[2017]['lumi'], Eras[2018]['lumi'], Eras['2017_VTR']['lumi'], Eras[
 '''
 For testing
 '''
-categories = ['MTR']
-eras = ['2017']
-Lumi_labels = [Eras[2017]['lumi_for_label']]
-Lumis = [Eras[2017]['lumi']]
-Regions = ['Zee']
+#categories = ['MTR']
+#eras = ['2017']
+#Lumi_labels = [Eras[2017]['lumi_for_label']]
+#Lumis = [Eras[2017]['lumi']]
+#Regions = ['SR']
 
 ROOT.gROOT.SetBatch()
 
 for category, Lumi_label, Lumi, era in zip(categories, Lumi_labels, Lumis, eras):
-    print bcolors.OKBLUE+"Processing "+bcolors.ENDC+bcolors.OKGREEN+category+" "+era+bcolors.ENDC
+    print(bcolors.OKBLUE+"Processing "+bcolors.ENDC+bcolors.OKGREEN+category+" "+era+bcolors.ENDC)
     location = Location+ "test_VBF_"+era+"_"+category+"_testing/"
     Output_dir = location+"/Plots"
     os.system("mkdir "+Output_dir)
     
     for region in Regions:
-        print bcolors.OKBLUE+"--Region: "+bcolors.ENDC+bcolors.OKGREEN+region+bcolors.ENDC
+        print(bcolors.OKBLUE+"--Region: "+bcolors.ENDC+bcolors.OKGREEN+region+bcolors.ENDC)
         output_dir =  Output_dir+ "/"+region
         os.system("mkdir "+output_dir)
         if category == 'VTR':
@@ -93,10 +93,10 @@ for category, Lumi_label, Lumi, era in zip(categories, Lumi_labels, Lumis, eras)
             variables = variables_MTR
 
         for variable in variables:
-            print bcolors.OKGREEN+"----Processing: ", variable[0]+bcolors.ENDC
+            print(bcolors.OKGREEN+"----Processing: ", variable[0]+bcolors.ENDC)
             if ("We" in region) or ("Zee" in region):
                 dataset_name = Datasets['single_ele']
             else:
                 dataset_name = Datasets['met']       
-            test = PlotVariables(output_dir, dataset_name, variable, weight_names, region, location, Bkg_processes, Lumi, Lumi_label)
+            test = PlotVariables(output_dir, dataset_name, variable, weight_names, region, location, Bkg_processes, Lumi, Lumi_label, category)
  #           i = i+1

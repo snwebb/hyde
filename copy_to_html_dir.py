@@ -3,8 +3,8 @@ from datetime import datetime
 
 #Edit this string to point to your output dir
 
-web_folder = '/eos/user/v/vmilosev/www/'
-input_folder = '/eos/user/v/vmilosev/SWAN_projects/Hinv-Plotting/work_200303/'
+web_folder = '~/public_html/'
+input_folder = '../'
 
 
 today = datetime.now()

@@ -56,18 +56,18 @@ def CreateHistogramNP(df,column_name, name, label, variable='n', color=0, lumi =
             
             #print i 
             if (counter >= Rebin): 
-                #print "Bin rebinned", i/Rebin
+                #print "Bin rebinned", int(i/Rebin)
                 #print "With value = ", value
-                #print 1.0*i/Rebin
-                h_test.SetBinContent(i/Rebin, value)
+                #print 1.0*int(i/Rebin)
+                h_test.SetBinContent(int(i/Rebin), value)
                 if N>0:
-                    h_test.SetBinError(i/Rebin, value/math.sqrt(N))
+                    h_test.SetBinError(int(i/Rebin), value/math.sqrt(N))
                 else:
-                    h_test.SetBinError(i/Rebin, 0)
+                    h_test.SetBinError(int(i/Rebin), 0)
                 
                 if variable != 'n':
-                    h_test.SetBinContent(i/Rebin, h_test.GetBinContent(i/Rebin)*lumi)
-                    h_test.SetBinError(i/Rebin, h_test.GetBinError(i/Rebin)*lumi)  
+                    h_test.SetBinContent(int(i/Rebin), h_test.GetBinContent(int(i/Rebin))*lumi)
+                    h_test.SetBinError(int(i/Rebin), h_test.GetBinError(int(i/Rebin))*lumi)  
 
                 if (i < nBins+1):   
                     counter = 1

@@ -23,7 +23,7 @@ groupBy = False
 weight_names = ''
 weight = 'weight_nominal::sumw'
 
-def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Location, Bkg_processes, Lumi, Lumi_label):
+def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Location, Bkg_processes, Lumi, Lumi_label, category):
     
     
         bkg_names = []
@@ -72,7 +72,7 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         data_for_ratio.append(data_hist[plot_count].Clone())
         bkg_stack.append(THStack("Background","Full_Background"))
         if printing:
-            print "Data", data_hist[plot_count].Integral()
+            print("Data", data_hist[plot_count].Integral())
 
 
         if ('W' in region) or ('Z' in region) or ('SR' in region) and not ("mindphi" in variable[Properties.Name].lower()):
@@ -126,7 +126,7 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
             #Scaling
             if Scaling:
                 if "DY" in bkg_name:
-                    print "Scaling DY"
+                    print("Scaling DY")
                     bkg_hist.Scale(1.15)
                 if "WJETS" in bkg_name:
                     bkg_hist.Scale(1.171714)
@@ -192,9 +192,10 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
             data_hist[plot_count].GetYaxis().SetRangeUser(0,1.7*bkg_for_ratio[plot_count].GetMaximum())
             if data_hist[plot_count].Integral() > 0:
                 data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*bkg_for_ratio[plot_count].GetMaximum())
-                if 'mjj' in variable[Properties.Name] or 'nomu' in variable[Properties.Name].lower():
-                    data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
-
+        if 'mjj' in variable[Properties.Name] or 'nomu' in variable[Properties.Name].lower():
+            data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
+            bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
+            
         data_hist[plot_count].GetXaxis().SetLabelSize(0.1)
         data_hist[plot_count].GetYaxis().SetTitleOffset(1.1)
         data_hist[plot_count].GetXaxis().SetTitleSize(.12)
@@ -204,7 +205,10 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         if not(len(signal_name)==0):
             signal_hist[plot_count].SetLineWidth(4)
             signal_hist[plot_count].SetFillStyle(0)
-            signal_hist[plot_count].Scale(5)
+            if 'vtr' in category.lower():
+                signal_hist[plot_count].Scale(1.5)
+            else:
+                signal_hist[plot_count].Scale(5)
             signal_hist[plot_count].Draw("hist same")
 
         #gPad.Draw()
