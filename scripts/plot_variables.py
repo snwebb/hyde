@@ -23,7 +23,7 @@ groupBy = False
 weight_names = ''
 weight = 'weight_nominal::sumw'
 
-def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Location, Bkg_processes, Lumi, Lumi_label, category):
+def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Location, Bkg_processes, Lumi, Lumi_label, category, LOG = False):
     
     
         bkg_names = []
@@ -39,7 +39,7 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         
         Scaling = False
 
-        LOG = False
+        #LOG = False
         
         
         c = []
@@ -197,7 +197,7 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
             bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
             
         data_hist[plot_count].GetXaxis().SetLabelSize(0.1)
-        data_hist[plot_count].GetYaxis().SetTitleOffset(1.1)
+        data_hist[plot_count].GetYaxis().SetTitleOffset(1.15)
         data_hist[plot_count].GetXaxis().SetTitleSize(.12)
 
         data_hist[plot_count].Draw("e1 same")
@@ -230,14 +230,14 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         data_for_ratio[plot_count].Divide(bkg_for_ratio[plot_count])
         data_for_ratio[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high])
 
-        data_for_ratio[plot_count].GetYaxis().SetRangeUser(0.71,1.29)
+        data_for_ratio[plot_count].GetYaxis().SetRangeUser(-0.49,2.49)
         data_for_ratio[plot_count].GetYaxis().SetTitle("Data / Pred.")
         data_for_ratio[plot_count].GetXaxis().SetTitleSize(.12)
         data_for_ratio[plot_count].GetYaxis().SetTitleSize(.12)
-        data_for_ratio[plot_count].GetYaxis().SetTitleOffset(0.55)
+        data_for_ratio[plot_count].GetYaxis().SetTitleOffset(0.57)
         data_for_ratio[plot_count].GetYaxis().SetLabelSize(0.1)
         data_for_ratio[plot_count].GetXaxis().SetLabelSize(0.1)
-        data_for_ratio[plot_count].Draw("e1")
+        data_for_ratio[plot_count].Draw("P0")
         bkg_band = bkg_for_ratio[plot_count].Clone()
         bkg_band_d = bkg_for_ratio[plot_count].Clone()
         bkg_band.Divide(bkg_band_d)

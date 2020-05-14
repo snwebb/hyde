@@ -82,7 +82,8 @@ for category, Lumi_label, Lumi, era in zip(categories, Lumi_labels, Lumis, eras)
     location = Location+ "test_VBF_"+era+"_"+category+"_testing/"
     Output_dir = location+"/Plots"
     os.system("mkdir "+Output_dir)
-    
+ #   if category == 'MTR':
+ #       continue    
     for region in Regions:
         print(bcolors.OKBLUE+"--Region: "+bcolors.ENDC+bcolors.OKGREEN+region+bcolors.ENDC)
         output_dir =  Output_dir+ "/"+region

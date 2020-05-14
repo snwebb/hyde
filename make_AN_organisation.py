@@ -7,6 +7,7 @@ MTR_SR_plots = [
 'leadingJet_mjj',
 'leading_dEtajj',
 'leading_dPhijj',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 VTR_SR_plots = [
@@ -14,6 +15,7 @@ VTR_SR_plots = [
 'lMjj', 
 'lMjj_leading_dEtajj',
 'lMjj_leading_dPhijj',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 MTR_Wmunu_plots = [
@@ -24,6 +26,7 @@ MTR_Wmunu_plots = [
 'MTmu_FAST',
 'Leading_muon_pt',
 'Leading_muon_eta',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 VTR_Wmunu_plots = [
@@ -34,6 +37,7 @@ VTR_Wmunu_plots = [
 'MTmu_FAST',
 'Leading_muon_pt',
 'Leading_muon_eta',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 
@@ -45,6 +49,7 @@ MTR_Wenu_plots = [
 'MTe_FAST',
 'Leading_electron_pt',
 'Leading_electron_eta',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 VTR_Wenu_plots = [
@@ -55,6 +60,7 @@ VTR_Wenu_plots = [
 'MTe_FAST',
 'Leading_electron_pt',
 'Leading_electron_eta',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 
@@ -66,6 +72,7 @@ MTR_Zmumu_plots = [
 'Leading_muon_pt',
 'Leading_muon_eta',
 'diMuon_mass',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 
@@ -77,6 +84,7 @@ VTR_Zmumu_plots = [
 'Leading_muon_pt',
 'Leading_muon_eta',
 'diMuon_mass',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 MTR_Zee_plots = [
@@ -87,6 +95,7 @@ MTR_Zee_plots = [
 'Leading_electron_pt',
 'Leading_electron_eta',
 'diElectron_mass',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 
@@ -98,6 +107,7 @@ VTR_Zee_plots = [
 'Leading_electron_pt',
 'Leading_electron_eta',
 'diElectron_mass',
+'MetNoLep_CleanJet_mindPhi',
 ]
 
 

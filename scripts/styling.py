@@ -6,7 +6,7 @@ import ROOT
 
 def Styling(region = 'Zmumu', Experiment = "CMS", Status = "Work in Progress", Lumi_label = "41.9"):
     
-    label = "Not Specified" 
+    label = "SR" 
     
     if region == 'Zmumu':
         label = 'Z#rightarrow #mu#mu'

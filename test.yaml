@@ -67,10 +67,10 @@ main_analysis:
                 folder_name: WJETS
                 latex_name: 'QCD W #rightarrow l#nu'
   
-#            8:
-#                color: '#ffffff'
-#                folder_name: QCD
-#                latex_name: QCD
+            8:
+                color: '#ffffff'
+                folder_name: QCD
+                latex_name: QCD
 
             9:
                 color: 1
@@ -149,17 +149,17 @@ qcd_estimate:
 
 trigger_study:
     METMHT:
-        location: 'TBA'
+        location: '../'
         eta:
            - 2017
            - 2018
-        dataset: SingleMuon
-        bkg: WJETS
+        dataset: data
+        bkg: mc
      
     VBF:
-        location: 'TBA'    
+        location: '../'    
         era:
             - 2017
             - 2018
-        dataset: SingleMuon
-        bkg: WJETS
+        dataset: data
+        bkg: mc

@@ -35,7 +35,7 @@ leadingJet_mjj:
     histogram_name: leadingJet_mjj--dijet_mass_
     histogram_label: 'M_{jj} [GeV];Events/100.0 GeV;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1 
+    rebin: 2 
     set_range: [0.0, 5000.0] 
     
 lMjj:
