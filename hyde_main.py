@@ -52,8 +52,8 @@ Bkg_processes = Input[Config.bkg_processes]
 Datasets = Input[Config.datasets]
 
 
-variables_MTR = CollectFromConfigVairables('test_variables_MTR.yaml')
-variables_VTR = CollectFromConfigVairables('test_variables_VTR.yaml')
+variables_MTR = CollectFromConfigVariables('test_variables_MTR.yaml')
+variables_VTR = CollectFromConfigVariables('test_variables_VTR.yaml')
 #print variables
 
 '''

@@ -6,7 +6,9 @@ main_analysis:
         eras:
             2017:
                 #lumi: 41859.516607442
+                #lumi: 9424
                 lumi: 41528.995402
+                #lumi: 21528.995402
                 lumi_for_label: '41.5'
             
             2018:
@@ -27,6 +29,11 @@ main_analysis:
             - SR 
 
         bkg_processes:
+            # 10:
+            #     color: '#886440'
+            #     folder_name: GluGluHtoInv
+            #     latex_name: 'gg H#rightarrow Inv'
+
             0:
                 color: '#7bc345'
                 folder_name: VV

@@ -43,13 +43,13 @@ def CollectFromConfig(config_location = 'test.yaml'):
 
 
 
-def CollectFromConfigVairables(config_location = 'test_variables.yaml'):
+def CollectFromConfigVariables(config_location = 'test_variables.yaml'):
     with open(config_location, 'r') as ymlfile:
         cfg = yaml.load(ymlfile)
         
     variables = []
-    
+
     for variable in cfg:
-        variables.append([cfg[variable]['file_name'], cfg[variable]['histogram_name'], cfg[variable]['histogram_label'], cfg[variable]['weight'], cfg[variable]['weight'], cfg[variable]['rebin'], cfg[variable]['set_range'][0], cfg[variable]['set_range'][1]])
+        variables.append([cfg[variable]['file_name'], cfg[variable]['histogram_name'], cfg[variable]['histogram_label'], cfg[variable]['weight'], cfg[variable]['weight'], cfg[variable]['rebin'], cfg[variable]['set_range'][0], cfg[variable]['set_range'][1], cfg[variable]['set_ratio_range'][0], cfg[variable]['set_ratio_range'][1]])
      
     return variables

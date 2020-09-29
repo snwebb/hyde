@@ -6,6 +6,7 @@ from scripts.create_histogram import *
 import ROOT
 from ROOT import TCanvas, TH1F, TF1, TLegend, gPad, THStack, TColor
 from scripts.styling import *
+import math
 
 class Properties():
     Name = 0
@@ -16,6 +17,8 @@ class Properties():
     Rebin = 5
     Axis_low = 6
     Axis_high = 7
+    Ratio_Axis_low = 8
+    Ratio_Axis_high = 9
 
 
 groupBy = False
@@ -200,6 +203,16 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         data_hist[plot_count].GetYaxis().SetTitleOffset(1.15)
         data_hist[plot_count].GetXaxis().SetTitleSize(.12)
 
+        #BLINDING
+        # if 'mjj' in variable[Properties.Name]:
+        #     if 'SR' in region:
+        #         print("SR blinding")
+        #         for i in range(1,data_hist[plot_count].GetNbinsX()+1):
+        #             data_hist[plot_count].SetBinContent(i,0)
+        #             data_hist[plot_count].SetBinError(i,0)
+        #             data_for_ratio[plot_count] = data_hist[plot_count].Clone()
+                
+
         data_hist[plot_count].Draw("e1 same")
 
         if not(len(signal_name)==0):
@@ -230,7 +243,12 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         data_for_ratio[plot_count].Divide(bkg_for_ratio[plot_count])
         data_for_ratio[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high])
 
-        data_for_ratio[plot_count].GetYaxis().SetRangeUser(-0.49,2.49)
+        data_for_ratio[plot_count].GetYaxis().SetRangeUser(variable[Properties.Ratio_Axis_low],variable[Properties.Ratio_Axis_high])
+        # maximum = max([data_for_ratio[plot_count].GetBinContent(b)+data_for_ratio[plot_count].GetBinError(b) for b in range(1,data_for_ratio[plot_count].GetNbinsX()+1)])
+        # minimum = min([data_for_ratio[plot_count].GetBinContent(b)-data_for_ratio[plot_count].GetBinError(b) for b in range(1,data_for_ratio[plot_count].GetNbinsX()+1)])
+        # data_for_ratio[plot_count].SetMaximum(min(math.ceil(10*maximum)/10,2.49))
+        # data_for_ratio[plot_count].SetMinimum(max(math.floor(10*minimum)/10,-0.49))
+        #data_for_ratio[plot_count].GetYaxis().SetRangeUser(-0.49,2.49)
         data_for_ratio[plot_count].GetYaxis().SetTitle("Data / Pred.")
         data_for_ratio[plot_count].GetXaxis().SetTitleSize(.12)
         data_for_ratio[plot_count].GetYaxis().SetTitleSize(.12)

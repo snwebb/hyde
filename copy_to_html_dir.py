@@ -16,7 +16,7 @@ Regions = ['Zmumu', 'Zee', 'Wmunu', 'Wenu', 'SR']
 Categories = ['MTR', 'VTR']
 Eras = ['2017', '2018']
 
-print('Processin location: ' + input_folder)
+print('Processing location: ' + input_folder)
 print('-- Copying files to :' + output_location)
 
 os.system('mkdir ' +  output_location)
