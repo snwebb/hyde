@@ -27,6 +27,7 @@ main_analysis:
             - Wmunu
             - Wenu
             - SR 
+            - QCDCR
 
         bkg_processes:
             # 10:
