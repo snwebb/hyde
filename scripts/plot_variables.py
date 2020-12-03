@@ -41,6 +41,7 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
 
         
         Scaling = False
+        ScalingQCDCR = True
 
         #LOG = False
         
@@ -86,11 +87,14 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         if 'mindPhi' in variable[0] or ('electron' in variable[Properties.Name].lower() and 'phi' in variable[Properties.Name].lower()):
             legend_args = (0.18, 0.55, 0.55, 0.91, '', 'NDC') 
 
+        if "QCDCR" in region:
+            legend_args = (0.18, 0.65, 0.9, 0.91, '', 'NDC')
 
         #take legend parametrisation out of for loop later
         legend.append(TLegend(*legend_args))
         legend[plot_count].SetFillStyle(0)
-
+        if "QCDCR" in region:
+            legend[plot_count].SetNColumns(3)
         legend[plot_count].AddEntry(data_hist[plot_count], 'Data', 'p')
 
         if not(len(signal_name) == 0):
@@ -134,9 +138,18 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
                 if "WJETS" in bkg_name:
                     bkg_hist.Scale(1.171714)
 
+            if ScalingQCDCR:
+                if "2018" in Location:
+                    if "QCDCR" in region:
+                        print("Scaling QCDCR by 0.85")
+                        bkg_hist.Scale(0.85)
+
                     
                     
             bkg_hist.GetXaxis().SetRangeUser(variable[Properties.Axis_low],variable[Properties.Axis_high]) #- Really strange!
+            if 'mindPhi' in variable[Properties.Name]:
+                if "QCDCR" in region:
+                    bkg_hist.GetXaxis().SetRangeUser(0,2) 
             bkg_stack[plot_count].Add(bkg_hist)
 
             if  bkg_names.index(bkg_name) == 0:
@@ -173,7 +186,12 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
 
         data_hist[plot_count].SetLineColor(1)
 
+
         data_hist[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high])
+
+        if 'mindPhi' in variable[Properties.Name]:
+            if "QCDCR" in region:
+                data_hist[plot_count].GetXaxis().SetRangeUser(0,2) 
 
 
 
@@ -192,13 +210,25 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         if LOG:
             data_hist[plot_count].GetYaxis().SetRangeUser(0.2,1000*bkg_for_ratio[plot_count].GetMaximum())
         else:
-            data_hist[plot_count].GetYaxis().SetRangeUser(0,1.7*bkg_for_ratio[plot_count].GetMaximum())
-            if data_hist[plot_count].Integral() > 0:
-                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*bkg_for_ratio[plot_count].GetMaximum())
+            if data_hist[plot_count].GetMaximum() > bkg_for_ratio[plot_count].GetMaximum():
+                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*data_hist[plot_count].GetMaximum())
+            else:
+                data_hist[plot_count].GetYaxis().SetRangeUser(0,1.7*bkg_for_ratio[plot_count].GetMaximum())
+            # if data_hist[plot_count].Integral() > 0:
+            #     data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*bkg_for_ratio[plot_count].GetMaximum())
+            #     if data_hist[plot_count].GetMaximum() > bkg_for_ratio[plot_count].GetMaximum():
+            #         data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*data_hist[plot_count].GetMaximum())
         if 'mjj' in variable[Properties.Name] or 'nomu' in variable[Properties.Name].lower():
-            data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
-            bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
-            
+            if data_hist[plot_count].GetMaximum() >bkg_for_ratio[plot_count].GetMaximum():
+                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*data_hist[plot_count].GetMaximum())
+                bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*data_hist[plot_count].GetMaximum())
+            else:
+                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
+                bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
+
+                
+
+
         data_hist[plot_count].GetXaxis().SetLabelSize(0.1)
         data_hist[plot_count].GetYaxis().SetTitleOffset(1.15)
         data_hist[plot_count].GetXaxis().SetTitleSize(.12)
@@ -242,13 +272,21 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         #r.SetTitle("");
         data_for_ratio[plot_count].Divide(bkg_for_ratio[plot_count])
         data_for_ratio[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high])
-
         data_for_ratio[plot_count].GetYaxis().SetRangeUser(variable[Properties.Ratio_Axis_low],variable[Properties.Ratio_Axis_high])
+
+        if "QCDCR" in region:
+            if 'vtr' in category.lower():
+                data_for_ratio[plot_count].GetYaxis().SetRangeUser(0,3)
+
+            if 'mindPhi' in variable[Properties.Name]:
+                data_for_ratio[plot_count].GetXaxis().SetRangeUser(0,2) 
+
         # maximum = max([data_for_ratio[plot_count].GetBinContent(b)+data_for_ratio[plot_count].GetBinError(b) for b in range(1,data_for_ratio[plot_count].GetNbinsX()+1)])
         # minimum = min([data_for_ratio[plot_count].GetBinContent(b)-data_for_ratio[plot_count].GetBinError(b) for b in range(1,data_for_ratio[plot_count].GetNbinsX()+1)])
         # data_for_ratio[plot_count].SetMaximum(min(math.ceil(10*maximum)/10,2.49))
         # data_for_ratio[plot_count].SetMinimum(max(math.floor(10*minimum)/10,-0.49))
         #data_for_ratio[plot_count].GetYaxis().SetRangeUser(-0.49,2.49)
+
         data_for_ratio[plot_count].GetYaxis().SetTitle("Data / Pred.")
         data_for_ratio[plot_count].GetXaxis().SetTitleSize(.12)
         data_for_ratio[plot_count].GetYaxis().SetTitleSize(.12)
