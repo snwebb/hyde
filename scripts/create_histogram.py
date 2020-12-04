@@ -34,13 +34,16 @@ def CreateHistogramNP(df,column_name, name, label, variable='n', color=0, lumi =
     
     
     Ok_to_rebin = False
+    Custom_rebin = False
     
-    if Rebin > 1: 
+    if Rebin > 1 : 
         if not(nBins % Rebin):
     #        #print "Ok to rebin."
             Ok_to_rebin = True
-     #   else:
-     #       #print "Not ok to rebin -- using orginal binning scheme with ", nBins, " bins."
+    #   else:
+    #       #print "Not ok to rebin -- using orginal binning scheme with ", nBins, " bins."
+    if Rebin == -999 :
+        Custom_rebin = True
 
     h_test = ROOT.TH1D("h_"+name,";"+label+";Events;;", nBins, d_bins)
     
@@ -101,6 +104,12 @@ def CreateHistogramNP(df,column_name, name, label, variable='n', color=0, lumi =
                 h_test.SetBinContent(i, h_test.GetBinContent(i)*lumi)
                 h_test.SetBinError(i,h_test.GetBinError(i)*lumi)        
                 
+    if Custom_rebin:
+        xbins = np.array((0,  200, 400, 600, 900, 1200, 1500, 2000, 2750, 3500, 5000))
+        
+        h_test.Rebin(len(xbins)-1, "h_"+name+"_binned",xbins)
+
+
     if color!=0 :
         h_test.SetFillColor(color)
         h_test.SetLineColor(color)
