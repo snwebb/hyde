@@ -70,6 +70,24 @@ Central_jet_eta:
     set_range: [-5.0, 5.0]
     set_ratio_range: [0.21, 1.79]
 
+Jet_eta_mindphi:
+    file_name: min_dphi_eta_argmin--jet_eta_mindphi
+    histogram_name: Jet_eta_mindphi--jet_eta_mindphi_
+    histogram_label: '#eta_{central};Events/0.4;;'
+    weight: 'weight_nominal:sumw'    
+    rebin: 2
+    set_range: [-5.0, 5.0]
+    set_ratio_range: [0.21, 1.79]
+
+Jet_phi_mindphi:
+    file_name: min_dphi_phi_argmin--jet_phi_mindphi
+    histogram_name: Jet_phi_mindphi--jet_phi_mindphi_
+    histogram_label: '#phi_{j 1};Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 5
+    set_range: [-3.5, 3.5]
+    set_ratio_range: [0.61, 1.39]
+
 lMjj_Leading_jet_pt--lMjj_jet1_pt:
     file_name: lMjj_Leading_jet_pt--lMjj_jet1_pt
     histogram_name:  'lMjj_Leading_jet_pt--lMjj_jet1_pt_'

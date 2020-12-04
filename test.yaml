@@ -158,7 +158,7 @@ qcd_estimate:
 trigger_study:
     METMHT:
         location: '../'
-        eta:
+        era:
            - 2017
            - 2018
         dataset: data
