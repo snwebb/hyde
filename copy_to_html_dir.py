@@ -3,16 +3,19 @@ from datetime import datetime
 
 #Edit this string to point to your output dir
 
-web_folder = '~/public_html/'
+var = '20201202-ReverseBJetVeto2017'
+#var = ''
+web_folder = '~/public_html/Production/'
 input_folder = '../'
-
+input_folder = '/vols/cms/VBFHinv/'+var + '/'
 
 today = datetime.now()
 #Production_title = 'Production_'+today.strftime("%b_%d_%Y_%H%M%S")
-Production_title = 'Production_'+today.strftime("%b_%d_%Y")
+#Production_title = 'Production_'+today.strftime("%b_%d_%Y")
+Production_title = 'Production_'+today.strftime("%b_%d_%Y"+"_" + var)
 output_location = web_folder + Production_title
 
-Regions = ['Zmumu', 'Zee', 'Wmunu', 'Wenu', 'SR']
+Regions = ['Zmumu', 'Zee', 'Wmunu', 'Wenu', 'SR', 'QCDCR']
 Categories = ['MTR', 'VTR']
 Eras = ['2017', '2018']
 
@@ -28,4 +31,5 @@ for era in Eras:
         os.system('cp -r '+input_folder+'test_VBF_'+era+'_'+category+'_testing/Plots/*  '+ output_location+'/'+category+'_'+era+'/')
         os.system('cp index.php '+output_location+'/'+category+'_'+era+'/')
         for region in Regions:
+            os.system('cp html/index_'+region+'_'+era+'_'+category+'.html ' + output_location + '/' +category+'_'+era+'/'+region+'/index.html')
             os.system('cp index.php '+output_location+'/'+category+'_'+era+'/'+region+'/')
