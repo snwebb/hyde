@@ -7,6 +7,7 @@ import ROOT
 from ROOT import TCanvas, TH1F, TF1, TLegend, gPad, THStack, TColor
 from scripts.styling import *
 import math
+import os
 
 class Properties():
     Name = 0
@@ -19,7 +20,7 @@ class Properties():
     Axis_high = 7
     Ratio_Axis_low = 8
     Ratio_Axis_high = 9
-
+    Log = 10
 
 groupBy = False
 
@@ -43,9 +44,9 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         Scaling = False
         ScalingQCDCR = True
 
-        #LOG = False
-        
-        
+        if variable[Properties.Log] == True:
+            LOG = True
+
         c = []
         p1 = []
         p2 = []
@@ -66,11 +67,16 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         prefix = Location+"output_"+region+"_sh/"
         mc_prefix = prefix
         
-
-
-        DATA = pd.read_csv(prefix+'/'+dataset_name+'/tbl_'+variable[Properties.Name]+weight_names+'.csv',comment='#')
+        csvfile = prefix+'/'+dataset_name+'/tbl_'+variable[Properties.Name]+weight_names+'.csv'
+        if os.path.isfile(csvfile):
+            DATA = pd.read_csv(csvfile,comment='#')
+        else:
+            print("File " + variable[Properties.Name] + " does not exist, continue")
+            return False
         tmp1_name, tmp2 = variable[Properties.Name].split('--')
-
+        out_name = tmp1_name
+        if ( variable[Properties.Rebin] == -999 ):
+            out_name = out_name + "_binned"
 
         data_hist.append(CreateHistogramNP(DATA, tmp1_name ,variable[Properties.HistName]+"_data",variable[Properties.AxisLabels],'n', 1, 1, variable[Properties.Rebin]))
         data_for_ratio.append(data_hist[plot_count].Clone())
@@ -208,7 +214,7 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         bkg_for_ratio[plot_count].Draw("E2 same")
 
         if LOG:
-            data_hist[plot_count].GetYaxis().SetRangeUser(0.2,1000*bkg_for_ratio[plot_count].GetMaximum())
+            data_hist[plot_count].GetYaxis().SetRangeUser(0.2,3000*bkg_for_ratio[plot_count].GetMaximum())
         else:
             if data_hist[plot_count].GetMaximum() > bkg_for_ratio[plot_count].GetMaximum():
                 data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*data_hist[plot_count].GetMaximum())
@@ -306,15 +312,15 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         gPad.RedrawAxis();
 
         if not(LOG):
-            c[plot_count].SaveAs(output_dir+"/"+tmp1_name+".pdf")
-            c[plot_count].SaveAs(output_dir+"/"+tmp1_name+".png")
-            c[plot_count].SaveAs(output_dir+"/"+tmp1_name+".C")
-            c[plot_count].SaveAs(output_dir+"/"+tmp1_name+".root")
+            c[plot_count].SaveAs(output_dir+"/"+out_name+".pdf")
+            c[plot_count].SaveAs(output_dir+"/"+out_name+".png")
+            c[plot_count].SaveAs(output_dir+"/"+out_name+".C")
+            c[plot_count].SaveAs(output_dir+"/"+out_name+".root")
         else:
-            c[plot_count].SaveAs(output_dir+"/"+tmp1_name+"_log.pdf")
-            c[plot_count].SaveAs(output_dir+"/"+tmp1_name+"_log.png")
-            c[plot_count].SaveAs(output_dir+"/"+tmp1_name+"_log.C")
-            c[plot_count].SaveAs(output_dir+"/"+tmp1_name+"_log.root")
+            c[plot_count].SaveAs(output_dir+"/"+out_name+"_log.pdf")
+            c[plot_count].SaveAs(output_dir+"/"+out_name+"_log.png")
+            c[plot_count].SaveAs(output_dir+"/"+out_name+"_log.C")
+            c[plot_count].SaveAs(output_dir+"/"+out_name+"_log.root")
 
 
         plot_count+=1
