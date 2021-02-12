@@ -105,10 +105,8 @@ def CreateHistogramNP(df,column_name, name, label, variable='n', color=0, lumi =
                 h_test.SetBinError(i,h_test.GetBinError(i)*lumi)        
                 
     if Custom_rebin:
-        xbins = np.array((0,  200, 400, 600, 900, 1200, 1500, 2000, 2750, 3500, 5000))
-        
-        h_test.Rebin(len(xbins)-1, "h_"+name+"_binned",xbins)
-
+        xbins = array('d', [0,  200, 400, 600, 900, 1200, 1500, 2000, 2750, 3500, 5000])
+        h_test = h_test.Rebin(len(xbins)-1, "h_"+name+"_binned",xbins)
 
     if color!=0 :
         h_test.SetFillColor(color)
