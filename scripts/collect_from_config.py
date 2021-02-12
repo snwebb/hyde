@@ -50,6 +50,9 @@ def CollectFromConfigVariables(config_location = 'test_variables.yaml'):
     variables = []
 
     for variable in cfg:
-        variables.append([cfg[variable]['file_name'], cfg[variable]['histogram_name'], cfg[variable]['histogram_label'], cfg[variable]['weight'], cfg[variable]['weight'], cfg[variable]['rebin'], cfg[variable]['set_range'][0], cfg[variable]['set_range'][1], cfg[variable]['set_ratio_range'][0], cfg[variable]['set_ratio_range'][1]])
+        log = False
+        if 'log' in cfg[variable]:
+            log = cfg[variable]['log']
+        variables.append([cfg[variable]['file_name'], cfg[variable]['histogram_name'], cfg[variable]['histogram_label'], cfg[variable]['weight'], cfg[variable]['weight'], cfg[variable]['rebin'], cfg[variable]['set_range'][0], cfg[variable]['set_range'][1], cfg[variable]['set_ratio_range'][0], cfg[variable]['set_ratio_range'][1], log])
      
     return variables
