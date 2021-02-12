@@ -43,6 +43,16 @@ lMjj--lMjj:
     set_range: [ 500.0, 5000.0]
     set_ratio_range: [-0.49, 2.49]
 
+lMjj--lMjj_binned:
+    file_name: lMjj--lMjj
+    histogram_name: lMjj_binned--lMjj_
+    histogram_label: 'M_{jj} [GeV];Events/GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: -999
+    set_range: [0.0, 5000.0] 
+    set_ratio_range: [0.01, 1.99]
+    log: True
+
 Met:
     file_name: Met--met
     histogram_name: Met--met_
@@ -51,7 +61,17 @@ Met:
     rebin: 1
     set_range: [0.0, 800.0]
     set_ratio_range: [0.21, 1.79]
-   
+
+horn_variable:
+    file_name: horn_variable--horn_variable
+    histogram_name: horn_variable--horn_variable_
+    histogram_label: '(PFMET-TkMET)/Recoil;Events/0.05 GeV;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [-1.00, 1.00]
+    set_ratio_range: [0.21, 1.79]
+    log: True   
+
 lMjj_Leading_jet_eta--lMjj_jet1_eta:
     file_name: lMjj_Leading_jet_eta--lMjj_jet1_eta
     histogram_name: 'lMjj_Leading_jet_eta--lMjj_jet1_eta_'
@@ -97,6 +117,15 @@ lMjj_Leading_jet_pt--lMjj_jet1_pt:
     set_range: [0.0, 800.0]
     set_ratio_range: [-0.49, 2.49]
 
+lMjj_Leading_jet_phi--lMjj_jet1_phi:
+    file_name: lMjj_Leading_jet_phi--lMjj_jet1_phi
+    histogram_name:  'lMjj_Leading_jet_phi--lMjj_jet1_phi_'
+    histogram_label:  '#phi_{j1}(lM_{jj});Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 2
+    set_range: [-3.5, 3.5]
+    set_ratio_range: [-0.49, 2.49]
+
 lMjj_Subleading_jet_eta--lMjj_jet2_eta:
     file_name: lMjj_Subleading_jet_eta--lMjj_jet2_eta
     histogram_name: 'lMjj_Subleading_jet_eta--lMjj_jet2_eta_'
@@ -123,6 +152,15 @@ lMjj_Subleading_jet_pt--lMjj_jet2_pt:
     rebin: 2
     set_range: [0.0, 400.0]
     set_ratio_range: [0.21, 1.79]
+
+lMjj_Subleading_jet_phi--lMjj_jet2_phi:
+    file_name: lMjj_Subleading_jet_phi--lMjj_jet2_phi
+    histogram_name:  'lMjj_Subleading_jet_phi--lMjj_jet2_phi_'
+    histogram_label:  '#phi_{j2}(lM_{jj});Events/0.1;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 2
+    set_range: [-3.5, 3.5]
+    set_ratio_range: [-0.49, 2.49]
  
 Leading_muon_eta:
     file_name: Leading_muon_eta--muon_eta1
@@ -200,6 +238,15 @@ MetNoMu:
 MetNoMu_phi:
     file_name: MetNoMu_phi--met_nolep_phi
     histogram_name: MetNoMu_phi--met_nolep_phi_
+    histogram_label: 'METNoMu_phi;Events;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 2
+    set_range: [-3.5, 3.5]    
+    set_ratio_range: [0.61, 1.39]
+
+Met_phi:
+    file_name: Met_phi--met_phi
+    histogram_name: Met_phi--met_phi_
     histogram_label: 'MET_phi;Events;;'
     weight: 'weight_nominal:sumw'
     rebin: 2
@@ -279,4 +326,42 @@ Subleading_electron_pt:
     set_range: [0.0, 300.0]
     set_ratio_range: [0.01,1.99]
 
+vecB: 
+    file_name: vecB--vecB 
+    histogram_name: vecB--vecB_
+    histogram_label: 'vecB;Events/bin width;;' 
+    weight: 'weight_nominal:sumw' 
+    rebin: 1 
+    set_range: [0.0, 1.0]
+    set_ratio_range: [0.59,2.49]
+    log: True
 
+vecDPhi:
+    file_name: vecDPhiVTR--vecDPhiVTR
+    histogram_name: vecDPhiVTR--vecDPhiVTR_
+    histogram_label: 'vecDPhi;Events/bin width;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 3.0]   
+    set_ratio_range: [0.01,1.99]
+    log: True
+
+both_jets_neEmEF: 
+    file_name: BothCleanJet_neEmEF--both_jets_neEmEF
+    histogram_name: BothCleanJet_neEmEF--both_jets_neEmEF_
+    histogram_label: 'jet neEmEF;Events/bin width;;' 
+    weight: 'weight_nominal:sumw' 
+    rebin: 2
+    set_range: [0.0, 1.05]
+    set_ratio_range: [0.01,1.99]
+    log: True
+
+DeltaPhi_TkMET_fMET:
+    file_name: DeltaPhi_TkMET_fMET--dphi_tkmet_pfmet
+    histogram_name: DeltaPhi_TkMET_fMET--dphi_tkmet_pfmet_
+    histogram_label: '#Delta#phi_{TkMET,PFMET};Events/bin width;;' 
+    weight: 'weight_nominal:sumw' 
+    rebin: 1
+    set_range: [0.0, 3.2]
+    set_ratio_range: [0.01,1.99]
+    log: True
