@@ -18,6 +18,8 @@ def Styling(region = 'Zmumu', Experiment = "CMS", Status = "Work in Progress", L
         label = 'W#rightarrow e#nu'
     if region == 'SR':
         label == 'SR'
+    if region == 'QCDCR':
+        label == 'QCD CR'
         
     
     tex1 = ROOT.TLatex(0.16,0.96,"CMS")
