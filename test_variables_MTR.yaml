@@ -241,7 +241,7 @@ MetNoMu_phi:
     histogram_name: MetNoMu_phi--met_nolep_phi_
     histogram_label: 'METNoMu_phi;Events;;'
     weight: 'weight_nominal:sumw'
-    rebin: 1
+    rebin: 2
     set_range: [-3.5, 3.5]   
     set_ratio_range: [0.61, 1.39]
 

@@ -276,7 +276,19 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         p2[plot_count].cd()
         #r = ROOT.TGraph(20); 
         #r.SetTitle("");
-        data_for_ratio[plot_count].Divide(bkg_for_ratio[plot_count])
+
+        #Save Data and MC Histograms to file
+        # datafile = ROOT.TFile.Open( output_dir+"/data.root", "UPDATE")
+        # data_for_ratio[plot_count].Write(out_name)
+        # datafile.Close()
+
+        # mcfile = ROOT.TFile.Open( output_dir+"/mc.root", "UPDATE")
+        # bkg_for_ratio[plot_count].Write(out_name)
+        # mcfile.Close()
+
+
+
+        data_for_ratio[plot_count].Divide(bkg_for_ratio[plot_count])        
         data_for_ratio[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high])
         data_for_ratio[plot_count].GetYaxis().SetRangeUser(variable[Properties.Ratio_Axis_low],variable[Properties.Ratio_Axis_high])
 
