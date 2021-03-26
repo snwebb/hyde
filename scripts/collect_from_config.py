@@ -24,7 +24,10 @@ def CollectFromConfig(config_location = 'test.yaml'):
                         regions = cfg[section][option]['regions']
                     else:
                         print("Error -- no regions specified. Stopping the production, please add at least one region to the config.")
-                    bkg_processes = cfg[section][option]['bkg_processes']
+                    if 'bkg_processes' in cfg[section][option].keys():
+                        bkg_processes = cfg[section][option]['bkg_processes']
+                    else:
+                        bkg_processes = []
                     datasets = cfg[section][option]['datasets']
                     print("--- Looking for the dataframes in : "+location)
                     print("--- Running with the following eras: ")
