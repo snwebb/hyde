@@ -1,6 +1,7 @@
 import os
 
-location = '..//'
+#location = '..//'
+location = '/vols/cms/VBFHinv/20210324-V7-LeadEta2p9/'
 
 MTR_SR_plots = [
 'MetNoMu',
@@ -8,6 +9,12 @@ MTR_SR_plots = [
 'leading_dEtajj',
 'leading_dPhijj',
 'MetNoLep_CleanJet_mindPhi',
+'CentralEtaMTR',
+'ForwardEtaMTR',
+'Leading_jet_eta',
+'Leading_jet_pt',
+'Subleading_jet_eta',
+'Subleading_jet_pt',
 ]
 
 MTR_QCDCR_plots = [
@@ -16,6 +23,12 @@ MTR_QCDCR_plots = [
 'leading_dEtajj',
 'leading_dPhijj',
 'MetNoLep_CleanJet_mindPhi',
+'CentralEtaMTR',
+'ForwardEtaMTR',
+'Leading_jet_eta',
+'Leading_jet_pt',
+'Subleading_jet_eta',
+'Subleading_jet_pt',
 ]
 
 VTR_SR_plots = [
@@ -24,6 +37,12 @@ VTR_SR_plots = [
 'lMjj_leading_dEtajj',
 'lMjj_leading_dPhijj',
 'MetNoLep_CleanJet_mindPhi',
+'CentralEtaVTR',
+'ForwardEtaVTR',
+'lMjj_Leading_jet_eta',
+'lMjj_Leading_jet_pt',
+'lMjj_Subleading_jet_eta',
+'lMjj_Subleading_jet_pt',
 ]
 
 VTR_QCDCR_plots = [
@@ -32,6 +51,12 @@ VTR_QCDCR_plots = [
 'lMjj_leading_dEtajj',
 'lMjj_leading_dPhijj',
 'MetNoLep_CleanJet_mindPhi',
+'CentralEtaVTR',
+'ForwardEtaVTR',
+'lMjj_Leading_jet_eta',
+'lMjj_Leading_jet_pt',
+'lMjj_Subleading_jet_eta',
+'lMjj_Subleading_jet_pt',
 ]
 
 MTR_Wmunu_plots = [
