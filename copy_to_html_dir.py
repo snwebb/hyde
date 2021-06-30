@@ -2,20 +2,22 @@ import os
 from datetime import datetime
 
 #Edit this string to point to your output dir
-
-var = '20201202-ReverseBJetVeto2017'
-#var = ''
 web_folder = '~/public_html/Production/'
-input_folder = '../'
+
+var = ''
+var = '20210630-UL-ElTrigSFs_VTRTrig'
 input_folder = '/vols/cms/VBFHinv/'+var + '/'
+
+#input_folder = '/home/hep/snwebb/invisible/Nick/analysis/'
+
 
 today = datetime.now()
 #Production_title = 'Production_'+today.strftime("%b_%d_%Y_%H%M%S")
 #Production_title = 'Production_'+today.strftime("%b_%d_%Y")
-Production_title = 'Production_'+today.strftime("%b_%d_%Y"+"_" + var)
+Production_title = 'Production_'+today.strftime("%Y_%m_%d"+"_" + var)
 output_location = web_folder + Production_title
 
-Regions = ['Zmumu', 'Zee', 'Wmunu', 'Wenu', 'SR', 'QCDCR']
+Regions = ['Zmumu', 'Zee', 'Wmunu', 'Wenu', 'SR', 'QCDCR', "HFNoise"]
 Categories = ['MTR', 'VTR']
 Eras = ['2017', '2018']
 

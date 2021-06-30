@@ -32,17 +32,17 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
     
         bkg_names = []
         label_names = []
+        signal_name = ""
         for Bkg_process in Bkg_processes:
             if Bkg_process == 9:
+                signal_name = [Bkg_processes[9]['folder_name']]  
                 continue
             bkg_names.append(Bkg_processes[Bkg_process]['folder_name'])
             label_names.append([Bkg_processes[Bkg_process]['folder_name'], Bkg_processes[Bkg_process]['latex_name'], Bkg_processes[Bkg_process]['color'], 0])
        
-        signal_name = [Bkg_processes[9]['folder_name']]  
 
-        
         Scaling = False
-        ScalingQCDCR = True
+        ScalingQCDCR = False
 
         if variable[Properties.Log] == True:
             LOG = True
@@ -207,33 +207,38 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
             
         data_hist[plot_count].Draw("e1")
 
-        bkg_stack[plot_count].Draw("hist same")
-        bkg_for_ratio[plot_count].SetFillColor(1)
-        bkg_for_ratio[plot_count].SetMarkerSize(0)
-        bkg_for_ratio[plot_count].SetFillStyle(3018)
-        bkg_for_ratio[plot_count].Draw("E2 same")
+        if ( len(Bkg_processes)!=0 ):
+            bkg_stack[plot_count].Draw("hist same")
+            bkg_for_ratio[plot_count].SetFillColor(1)
+            bkg_for_ratio[plot_count].SetMarkerSize(0)
+            bkg_for_ratio[plot_count].SetFillStyle(3018)
+            bkg_for_ratio[plot_count].Draw("E2 same")
 
         if LOG:
-            data_hist[plot_count].GetYaxis().SetRangeUser(0.2,3000*bkg_for_ratio[plot_count].GetMaximum())
+            if ( len(Bkg_processes)!=0 ):
+                data_hist[plot_count].GetYaxis().SetRangeUser(0.2,3000*bkg_for_ratio[plot_count].GetMaximum())
         else:
-            if data_hist[plot_count].GetMaximum() > bkg_for_ratio[plot_count].GetMaximum():
-                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*data_hist[plot_count].GetMaximum())
+            if ( len(Bkg_processes)!=0 ):
+                if data_hist[plot_count].GetMaximum() > bkg_for_ratio[plot_count].GetMaximum():
+                    data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*data_hist[plot_count].GetMaximum())
+                else:
+                    data_hist[plot_count].GetYaxis().SetRangeUser(0,1.7*bkg_for_ratio[plot_count].GetMaximum())
             else:
-                data_hist[plot_count].GetYaxis().SetRangeUser(0,1.7*bkg_for_ratio[plot_count].GetMaximum())
+                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*data_hist[plot_count].GetMaximum())
             # if data_hist[plot_count].Integral() > 0:
             #     data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*bkg_for_ratio[plot_count].GetMaximum())
             #     if data_hist[plot_count].GetMaximum() > bkg_for_ratio[plot_count].GetMaximum():
             #         data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.7*data_hist[plot_count].GetMaximum())
         if 'mjj' in variable[Properties.Name] or 'nomu' in variable[Properties.Name].lower():
-            if data_hist[plot_count].GetMaximum() >bkg_for_ratio[plot_count].GetMaximum():
-                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*data_hist[plot_count].GetMaximum())
-                bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*data_hist[plot_count].GetMaximum())
+            if ( len(Bkg_processes)!=0 ):
+                if data_hist[plot_count].GetMaximum() >bkg_for_ratio[plot_count].GetMaximum():
+                    data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*data_hist[plot_count].GetMaximum())
+                    bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*data_hist[plot_count].GetMaximum())
+                else:
+                    data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
+                    bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
             else:
-                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
-                bkg_stack[plot_count].GetYaxis().SetRangeUser(0.1,1.3*bkg_for_ratio[plot_count].GetMaximum())
-
-                
-
+                data_hist[plot_count].GetYaxis().SetRangeUser(0.1,1.3*data_hist[plot_count].GetMaximum())
 
         data_hist[plot_count].GetXaxis().SetLabelSize(0.1)
         data_hist[plot_count].GetYaxis().SetTitleOffset(1.15)
@@ -282,46 +287,48 @@ def PlotVariables(output_dir, dataset_name, variable, weight_names, region, Loca
         # data_for_ratio[plot_count].Write(out_name)
         # datafile.Close()
 
-        # mcfile = ROOT.TFile.Open( output_dir+"/mc.root", "UPDATE")
-        # bkg_for_ratio[plot_count].Write(out_name)
+        # mcfile = ROOT.TFile.Open( output_dir+"/mc_signal.root", "UPDATE")
+        # #bkg_for_ratio[plot_count].Write(out_name)
+        # signal_hist[plot_count].Write(out_name)
+        # #bkg_for_ratio[plot_count].Write(out_name)
         # mcfile.Close()
 
 
+        if ( len(Bkg_processes)!=0 ):
+            data_for_ratio[plot_count].Divide(bkg_for_ratio[plot_count])        
+            data_for_ratio[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high])
+            data_for_ratio[plot_count].GetYaxis().SetRangeUser(variable[Properties.Ratio_Axis_low],variable[Properties.Ratio_Axis_high])
 
-        data_for_ratio[plot_count].Divide(bkg_for_ratio[plot_count])        
-        data_for_ratio[plot_count].GetXaxis().SetRangeUser(variable[Properties.Axis_low], variable[Properties.Axis_high])
-        data_for_ratio[plot_count].GetYaxis().SetRangeUser(variable[Properties.Ratio_Axis_low],variable[Properties.Ratio_Axis_high])
+            if "QCDCR" in region:
+                if 'vtr' in category.lower():
+                    data_for_ratio[plot_count].GetYaxis().SetRangeUser(0,3)
 
-        if "QCDCR" in region:
-            if 'vtr' in category.lower():
-                data_for_ratio[plot_count].GetYaxis().SetRangeUser(0,3)
+                if 'mindPhi' in variable[Properties.Name]:
+                    data_for_ratio[plot_count].GetXaxis().SetRangeUser(0,2) 
 
-            if 'mindPhi' in variable[Properties.Name]:
-                data_for_ratio[plot_count].GetXaxis().SetRangeUser(0,2) 
+            # maximum = max([data_for_ratio[plot_count].GetBinContent(b)+data_for_ratio[plot_count].GetBinError(b) for b in range(1,data_for_ratio[plot_count].GetNbinsX()+1)])
+            # minimum = min([data_for_ratio[plot_count].GetBinContent(b)-data_for_ratio[plot_count].GetBinError(b) for b in range(1,data_for_ratio[plot_count].GetNbinsX()+1)])
+            # data_for_ratio[plot_count].SetMaximum(min(math.ceil(10*maximum)/10,2.49))
+            # data_for_ratio[plot_count].SetMinimum(max(math.floor(10*minimum)/10,-0.49))
+            #data_for_ratio[plot_count].GetYaxis().SetRangeUser(-0.49,2.49)
 
-        # maximum = max([data_for_ratio[plot_count].GetBinContent(b)+data_for_ratio[plot_count].GetBinError(b) for b in range(1,data_for_ratio[plot_count].GetNbinsX()+1)])
-        # minimum = min([data_for_ratio[plot_count].GetBinContent(b)-data_for_ratio[plot_count].GetBinError(b) for b in range(1,data_for_ratio[plot_count].GetNbinsX()+1)])
-        # data_for_ratio[plot_count].SetMaximum(min(math.ceil(10*maximum)/10,2.49))
-        # data_for_ratio[plot_count].SetMinimum(max(math.floor(10*minimum)/10,-0.49))
-        #data_for_ratio[plot_count].GetYaxis().SetRangeUser(-0.49,2.49)
+            data_for_ratio[plot_count].GetYaxis().SetTitle("Data / Pred.")
+            data_for_ratio[plot_count].GetXaxis().SetTitleSize(.12)
+            data_for_ratio[plot_count].GetYaxis().SetTitleSize(.12)
+            data_for_ratio[plot_count].GetYaxis().SetTitleOffset(0.57)
+            data_for_ratio[plot_count].GetYaxis().SetLabelSize(0.1)
+            data_for_ratio[plot_count].GetXaxis().SetLabelSize(0.1)
+            data_for_ratio[plot_count].Draw("P0")
+            bkg_band = bkg_for_ratio[plot_count].Clone()
+            bkg_band_d = bkg_for_ratio[plot_count].Clone()
+            bkg_band.Divide(bkg_band_d)
+            bkg_band.SetFillColor(1)
+            bkg_band.SetMarkerSize(0)
+            bkg_band.SetFillStyle(3018)
+            bkg_band.Draw("E2 same")
+            #        c[plot_count].Draw()
 
-        data_for_ratio[plot_count].GetYaxis().SetTitle("Data / Pred.")
-        data_for_ratio[plot_count].GetXaxis().SetTitleSize(.12)
-        data_for_ratio[plot_count].GetYaxis().SetTitleSize(.12)
-        data_for_ratio[plot_count].GetYaxis().SetTitleOffset(0.57)
-        data_for_ratio[plot_count].GetYaxis().SetLabelSize(0.1)
-        data_for_ratio[plot_count].GetXaxis().SetLabelSize(0.1)
-        data_for_ratio[plot_count].Draw("P0")
-        bkg_band = bkg_for_ratio[plot_count].Clone()
-        bkg_band_d = bkg_for_ratio[plot_count].Clone()
-        bkg_band.Divide(bkg_band_d)
-        bkg_band.SetFillColor(1)
-        bkg_band.SetMarkerSize(0)
-        bkg_band.SetFillStyle(3018)
-        bkg_band.Draw("E2 same")
-#        c[plot_count].Draw()
-
-        gPad.RedrawAxis();
+            gPad.RedrawAxis();
 
         if not(LOG):
             c[plot_count].SaveAs(output_dir+"/"+out_name+".pdf")

@@ -232,7 +232,7 @@ MetNoMu:
     histogram_label: 'E_{T,miss, no #mu} [GeV];Events/10.0 GeV;;'
     weight: 'weight_nominal:sumw'
     rebin: 1
-    set_range: [250.0, 800]
+    set_range: [0.0, 800]
     set_ratio_range: [0.01, 1.99]
     
 
@@ -365,3 +365,39 @@ DeltaPhi_TkMET_fMET:
     set_range: [0.0, 3.2]
     set_ratio_range: [0.01,1.99]
     log: True
+
+Leading_jet_hfsigmaEtaEta:
+    file_name: Leading_jet_hfsigmaEtaEta--jet_hfsigmaEtaEta1
+    histogram_name: Leading_jet_hfsigmaEtaEta--jet_hfsigmaEtaEta1_
+    histogram_label: '#sigma_{#eta#eta};Events/0.4;;'
+    weight: 'weight_nominal:sumw'    
+    rebin: 1
+    set_range: [0.0, 0.5]
+    set_ratio_range: [0.01, 1.99]
+
+Leading_jet_hfsigmaPhiPhi:
+    file_name: Leading_jet_hfsigmaPhiPhi--jet_hfsigmaPhiPhi1
+    histogram_name: Leading_jet_hfsigmaPhiPhi--jet_hfsigmaPhiPhi1_
+    histogram_label: '#sigma_{#phi#phi};Events/0.4;;'
+    weight: 'weight_nominal:sumw'    
+    rebin: 1
+    set_range: [0.0, 0.5]
+    set_ratio_range: [0.01, 1.99]
+
+Subleading_jet_hfsigmaEtaEta:
+    file_name: Subleading_jet_hfsigmaEtaEta--jet_hfsigmaEtaEta2
+    histogram_name: Subleading_jet_hfsigmaEtaEta--jet_hfsigmaEtaEta2_
+    histogram_label: '#sigma_{#eta#eta};Events/0.4;;'
+    weight: 'weight_nominal:sumw'    
+    rebin: 1
+    set_range: [0.0, 0.5]
+    set_ratio_range: [0.01, 1.99]
+
+Subleading_jet_hfsigmaPhiPhi:
+    file_name: Subleading_jet_hfsigmaPhiPhi--jet_hfsigmaPhiPhi2
+    histogram_name: Subleading_jet_hfsigmaPhiPhi--jet_hfsigmaPhiPhi2_
+    histogram_label: '#sigma_{#phi#phi};Events/0.4;;'
+    weight: 'weight_nominal:sumw'    
+    rebin: 1
+    set_range: [0.0, 0.5]
+    set_ratio_range: [0.01, 1.99]

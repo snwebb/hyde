@@ -365,3 +365,39 @@ DeltaPhi_TkMET_fMET:
     set_range: [0.0, 3.2]
     set_ratio_range: [0.01,1.99]
     log: True
+
+lMjj_leading_hfsigmaEtaEta--lMjj_jet1_hfsigmaEtaEta:
+    file_name: lMjj_leading_hfsigmaEtaEta--lMjj_jet1_hfsigmaEtaEta
+    histogram_name: 'lMjj_leading_hfsigmaEtaEta--lMjj_jet1_hfsigmaEtaEta_'
+    histogram_label: '#sigma_{#eta#eta};Events/0.4;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 0.5]
+    set_ratio_range: [0.01, 1.99]
+
+lMjj_leading_hfsigmaPhiPhi--lMjj_jet1_hfsigmaPhiPhi:
+    file_name: lMjj_leading_hfsigmaPhiPhi--lMjj_jet1_hfsigmaPhiPhi
+    histogram_name: 'lMjj_leading_hfsigmaPhiPhi--lMjj_jet1_hfsigmaPhiPhi_'
+    histogram_label: '#sigma_{#phi#phi};Events/0.4;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 0.5]
+    set_ratio_range: [0.01, 1.99]
+
+lMjj_subleading_hfsigmaEtaEta--lMjj_jet2_hfsigmaEtaEta:
+    file_name: lMjj_subleading_hfsigmaEtaEta--lMjj_jet2_hfsigmaEtaEta
+    histogram_name: 'lMjj_subleading_hfsigmaEtaEta--lMjj_jet2_hfsigmaEtaEta_'
+    histogram_label: '#sigma_{#eta#eta};Events/0.4;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 0.5]
+    set_ratio_range: [0.01, 1.99]
+
+lMjj_subleading_hfsigmaPhiPhi--lMjj_jet2_hfsigmaPhiPhi:
+    file_name: lMjj_subleading_hfsigmaPhiPhi--lMjj_jet2_hfsigmaPhiPhi
+    histogram_name: 'lMjj_subleading_hfsigmaPhiPhi--lMjj_jet2_hfsigmaPhiPhi_'
+    histogram_label: '#sigma_{#phi#phi};Events/0.4;;'
+    weight: 'weight_nominal:sumw'
+    rebin: 1
+    set_range: [0.0, 0.5]
+    set_ratio_range: [0.01, 1.99]

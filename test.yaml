@@ -3,6 +3,7 @@ main_analysis:
         #location: 'test_191206/test_VBF_2018_MTR_testing_ICxs/'
         #location: 'test_191206/test_VBF_2017_MTR_testing/'
         location: '../'
+        #location: '/vols/cms/VBFHinv/20210519-UL-FixSync/'
         eras:
             2017:
                 #lumi: 41859.516607442
@@ -13,8 +14,12 @@ main_analysis:
             
             2018:
                 #lumi: 58877.436922739
-                lumi: 59740.56520
+                lumi: 59740.56520  #normal
+                #lumi: 21100  #before hem
+                #lumi: 38631  #after hem
                 lumi_for_label: '59.7'
+                #lumi_for_label: '21.1'
+                #lumi_for_label: '38.6'
                 
             2017_VTR:
                 #lumi: 41859.516607442
@@ -28,6 +33,7 @@ main_analysis:
             - Wenu
             - SR 
             - QCDCR
+            - HFNoise
 
         bkg_processes:
             # 10:
